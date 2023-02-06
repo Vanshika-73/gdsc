@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link ,useLocation} from 'react-router-dom';
 import Logo from './partials/Logo';
-
 const propTypes = {
   navPosition: PropTypes.string,
   hideNav: PropTypes.bool,
@@ -29,7 +28,8 @@ const Header = ({
   bottomDivider,
   ...props
 }) => {
-
+  const location = useLocation();
+  console.log(location.pathname); 
   const [isActive, setIsactive] = useState(false);
 
   const nav = useRef(null);
@@ -120,7 +120,7 @@ const Header = ({
                       className="list-reset header-nav-right"
                     >
                       <li>
-                        <Link to="#0" className="button button-primary button-wide-mobile button-sm" onClick={closeMenu}>Sign up</Link>
+                        {(location?.pathname==='/signup' || location?.pathname==='/signupres' || location?.pathname==='/signupvol')?null: <Link to="/signup" className="button button-primary button-wide-mobile button-sm" onClick={closeMenu}>Sign up</Link>}
                       </li>
                     </ul>}
                 </div>
